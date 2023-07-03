@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PRD: Peer Rank and Discussion
+Improves Large Language Model based Evaluations">
+  <meta name="keywords" content="LLM Evaluation, LLM Peer Rank, LLM Peer Discussion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD: Peer Rank and Discussion
+    Improve Large Language Model based Evaluations</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PRD: Peer Rank and Discussion <br/>
+            Improve Large Language Model based Evaluations</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="mailto:ruosen.li@utdallas.edu?Peer Rank and Discussions Paper">Ruosen Li</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="mailto:teerth.patel@utdallas.edu?Peer Rank and Discussions Paper">Teerth Patel</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="mailto:xinya.du@utdallas.edu?Peer Rank and Discussions Paper">Xinya Du</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Texas at Dallas</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://buckeyemailosu-my.sharepoint.com/:u:/g/personal/zhang_13253_buckeyemail_osu_edu/EcrFUCQYPyRGvZ9QukFqJ7gBnr5gmPeha9g-I68qiU2shQ?e=cPwhqC"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="far fa-images"></i>-->
+<!--                  </span>-->
+<!--                  <span>Train</span>-->
+<!--                </a>-->
+<!--              </span>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+<!-- <section class="section"> -->
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <img src="static/images/teaser-figure.jpeg">
+        <h2 class="subtitle has-text-centered">
+          MagicBrush provides 10K manually annotated real image editing triplets (source image,
+          instruction, target image), supporting both single-turn and multi-turn instruction-guided editing.
+        </h2>
+      <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Text-guided image editing is widely needed in daily life, ranging from personal use to professional applications such as Photoshop.
+            However, the existing language-guided image editing methods are either zero-shot or trained on automatically synthesized dataset, which contains high volume of noise. 
+            Thus, the existing models requires lots of manual tuning to produce desirable outcome.
+          </p>
+          <p>
+            To address this issue, we introduce <strong>MagicBrush</strong>, the first large-scale, manually-annotated instruction-guided image editing dataset covering diverse scenarios single-turn, multi-turn, mask-provided, and mask-free editing.
+            <strong>MagicBrush</strong> comprises 10K (source image, instruction, target image) triples, which is sufficient to train large-scale image editing models.
+            We fine-tune InstructPix2Pix on <strong>MagicBrush</strong> and show that the new model can produce much better images according to human evaluation.
+          </p>
+          <p>
+            We further conduct extensive experiments to evaluate current image editing baselines from multiple dimensions including quantitative, qualitative, and human studies.
+            The results reveal the challenging nature of our dataset and the gap between current baselines and real-world editing needs.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Dataset Comparison. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Dataset Comparison</h2>
+          <!-- <h2 class="subtitle has-text-centered">
+              Comparison of different image editing datasets.
+        </h2> -->
+            <img src="static/images/dataset-comparison.jpeg">
+        </div>
+      </div>
+      <!--/ Dataset Comparison. -->
+    </section>
+  
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Qualitative Study. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Qualitative Study</h2>
+              <h2 class="subtitle has-text-centered">
+                <!-- <p> -->
+                Results of mask-free Text2LIVE, mask-provided GLIDE, InstructPix2Pix, fine-tuned InstructPix2Pix, and ground truth images in MagicBrush.
+            <!-- </p> -->
+              </h2>
+              <img src="static/images/qualitative_study_multi_turn.jpeg">
+          </div>
+        </div>
+        <!--/ Qualitative Study. -->
+      </section>
+
+
+    <!-- TODO -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/drogozhang" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
