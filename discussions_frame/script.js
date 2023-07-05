@@ -171,11 +171,14 @@ function winMessage(preference) {
 }
 
 function makeDiscussionMessageView({model, content, preference}, colorClass){
+    const rowdiv = document.createElement('div');
+    rowdiv.className = "row";
+
     const betterModelMessage = winMessage(preference);
     const div = document.createElement('div');
     div.className = "card expandable-card";
     div.innerHTML = `
-        <div class="card-header ${colorClass}" >${modelNameMapping[model]}: ${betterModelMessage}</div>
+        <div class="card-header pad-card-bottom ${colorClass}" >${modelNameMapping[model]}: ${betterModelMessage}</div>
         <div class="card-body">
             <div class="card-text-container">
                 <div class="card-text" >${text2Markdown(content)}</div>
@@ -192,7 +195,9 @@ function makeDiscussionMessageView({model, content, preference}, colorClass){
         e.target.innerHTML = card.classList.contains('expanded') ? less : more;
     });
 
-    return div;
+    rowdiv.appendChild(div)
+
+    return rowdiv;
 }
 
 function displayAnswers(index) {
