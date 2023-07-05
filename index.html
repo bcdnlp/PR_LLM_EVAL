@@ -183,8 +183,14 @@ Improves Large Language Model based Evaluations">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Elo Scores</h2>
         <h2 class="subtitle has-text-centered">
-          <iframe src="static/images/gpt4-elotrends-interval1-smoothed.html" height=500 width="100%" scrolling="no" frameborder="0"></iframe>
-          Elo scores and Win rates
+          <iframe src="static/images/gpt4-elotrends-interval1-smoothed.html" height=600 width="100%" scrolling="no" frameborder="0"></iframe>
+          <p align="left">
+            GPT-4 Elo scores every 100 battles on Vi-cuna80 dataset.
+            We can observe that GPT-4 encodes self-enhancement across the entire process, while our <b>PR approach-base evaluation correlates with
+            human pairwise comparisons well</b>. It appears that a weighted peer ranking also provides a more accurate evaluation of language models at the level of
+            the global performance of models. At the example level, a weighted peer ranking also provides higher accuracy and a minimally higher agreement with
+            human reviews.
+          </p>
         </h2>
         <!--        <img src="static/images/qualitative_study_multi_turn.jpeg">-->
       </div>
@@ -200,10 +206,18 @@ Improves Large Language Model based Evaluations">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Pairwise win rate heatmaps</h2>
         <h2 class="subtitle has-text-centered">
-          <iframe src="static/images/all_weighted_heatmap.html" height=500 width="100%" scrolling="no" frameborder="0"></iframe>
-          <iframe src="static/images/gpt4_heatmap.html" height=500 width="100%" scrolling="no" frameborder="0"></iframe>
-          <iframe src="static/images/arena_heatmap.html" height=500 width="100%" scrolling="no" frameborder="0"></iframe>
-          Pairwise win rate heatmaps
+          <iframe src="static/images/all_weighted_heatmap.html" height=600 width="100%" scrolling="no" frameborder="0"></iframe>
+          <iframe src="static/images/gpt4_heatmap.html" height=600 width="100%" scrolling="no" frameborder="0"></iframe>
+          <iframe src="static/images/arena_heatmap.html" height=600 width="100%" scrolling="no" frameborder="0"></iframe>
+          <p align="left">
+          In the above figures, we present the detailed version of <b>pairwise win rates between every two contestants (LLMs)</b>.
+          We compare our evaluation with GPT-4 based evaluation, as well as the Chatbot Arena leaderboard.
+          The
+          <a href="https://lmsys.org/blog/2023-05-25-leaderboard/">Arena ranking</a>
+          is based on user queries and their corresponding preferences for two responses.
+          The figure demonstrates that although both approaches favor GPT-4 and Claude answers, the win rates calculated
+          by our approach All (weighted) correlate better with Arena win rate, especially on weaker models.
+          </p>
         </h2>
         <!--        <img src="static/images/qualitative_study_multi_turn.jpeg">-->
       </div>
@@ -220,7 +234,15 @@ Improves Large Language Model based Evaluations">
         <h2 class="title is-3">Weights Pie Chart</h2>
         <h2 class="subtitle has-text-centered">
           <iframe src="static/images/reviewer_weights.html" height=500 width="100%" scrolling="no" frameborder="0"></iframe>
-          Weights Pie Chart
+          <p align="left">
+          The above figure is the peer rank final round weights of each reviewer in our All (weighted) setting.
+          </p>
+          <br/>
+          <p align="left">
+          In the beginning, when the weight is one for every reviewer (weights equal to one), the win rate given by “All reviewers” is low
+          at about 0.749 partially because each reviewer is treated equally so that they might have a preference to its own answer.
+          After several rounds/iterations, the final win rate becomes more fair.
+          </p>
         </h2>
         <!--        <img src="static/images/qualitative_study_multi_turn.jpeg">-->
       </div>
@@ -228,23 +250,6 @@ Improves Large Language Model based Evaluations">
     <!--/ Qualitative Study. -->
   </div>
 </section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Qualitative Study. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Position Bias</h2>
-        <h2 class="subtitle has-text-centered">
-          Positional Bias Figures and Diagrams
-        </h2>
-        <!--        <img src="static/images/qualitative_study_multi_turn.jpeg">-->
-      </div>
-    </div>
-    <!--/ Qualitative Study. -->
-  </div>
-</section>
-
 
 <footer class="footer">
   <div class="container">
