@@ -20,11 +20,13 @@
 <body>
 <div class="pt-3 m-3">
     <div class="form-row">
+<!--
         <div class="form-group col-md-2">
             <label for="category-select">Category</label>
             <select class="form-control" id="category-select"></select>
         </div>
-        <div class="form-group col-md-8">
+-->
+        <div class="form-group col-md-10">
             <label for="question-select">Question</label>
             <select class="form-control" id="question-select"></select>
         </div>
@@ -50,7 +52,7 @@
                 <!-- header -->
                 <div class="card-header color-red pad-card-bottom" id="first-model-header-bg">
                     <div class="col-md-5" style="align-items: center; display: flex;">
-                        <label id="first-model-header">Assistant #1</label>
+                        <label id="first-model-header">Assistant A</label>
                     </div>
                 </div>
                 <!-- body -->
@@ -68,7 +70,7 @@
                 <!-- header -->
                 <div class="card-header color-blue pad-card-bottom" id="second-model-header-bg">
                     <div class="col-md-5" style="align-items: center; display: flex;">
-                        <label id="second-model-header">Assistant #2</label>
+                        <label id="second-model-header">Assistant B</label>
                     </div>
                 </div>
                 <!-- body -->
@@ -90,11 +92,8 @@
                 <!-- header -->
                 <div class="card-header color-purple pad-card-bottom" id="first-reviewer-header-bg">
                     <div class="row">
-                        <div class="col-md-5" style="align-items: center; display: flex;">
+                        <div class="col-md-12" style="align-items: center; display: flex;">
                             <label id="first-reviewer-header">Assistant #1</label>
-                        </div>
-                        <div class="col-md-7">
-                            <select class="form-control" id="first-reviewer-select" style="height: fit-content; margin-top: -0.3rem;"></select>
                         </div>
                     </div>
                 </div>
@@ -113,11 +112,8 @@
                 <!-- header -->
                 <div class="card-header color-green pad-card-bottom" id="second-reviewer-header-bg">
                     <div class="row">
-                        <div class="col-md-5" style="align-items: center; display: flex;">
+                        <div class="col-md-12" style="align-items: center; display: flex;">
                             <label id="second-reviewer-header">Assistant #2</label>
-                        </div>
-                        <div class="col-md-7">
-                            <select class="form-control" id="second-reviewer-select" style="height: fit-content; margin-top: -0.3rem;"></select>
                         </div>
                     </div>
                 </div>
@@ -154,9 +150,6 @@
             console.log(json_data);
             // Populate the models and questions.
             populateQuestions(json_data);
-            const models = json_data.map((data) => [data.reviewer_1_model, data.reviewer_2_model]).flat();
-            const unique_models = [...new Set(models)];
-            populateModels(unique_models);
             displayQuestion(currentQuestionIndex);
         } catch (error) {
             console.log(error);

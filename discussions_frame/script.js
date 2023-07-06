@@ -59,48 +59,18 @@ function updateQuestionSelect(question_id) {
         // make option
         const option = document.createElement('option');
         option.value = index.toString();
-        option.textContent = 'Q' + index.toString() + ': ' + question[0].question;
+        option.textContent = question.reviewers
+            .map(r => modelNameMapping[r]).join(' vs ')
+            + ': ' + question.question;
         select.appendChild(option);
     });
-    // Populate the question select.
-    // category = questionMapping[question_id].category;
-    // categoryMapping[category].forEach(question_id => {
-    //     const question = questionMapping[question_id];
-    //     const option = document.createElement('option');
-    //     option.value = question_id;
-    //     option.textContent = 'Q' + question_id.toString() + ': ' + question.question;
-    //     select.appendChild(option);
-    // });
     select.value = question_id;
 }
 
-function updateModelSelect() {
-    // const first_select = document.getElementById('first-model-select');
-    // const second_select = document.getElementById('second-model-select');
-    // document.getElementById('first-model-figure').src = modelFigureMapping[first_select.value];
-    // document.getElementById('second-model-figure').src = modelFigureMapping[second_select.value];
-}
-
-function populateModels(models) {
-    const first_select = document.getElementById('first-reviewer-select');
-    const second_select = document.getElementById('second-reviewer-select');
-    models.forEach(model => {
-        const option = document.createElement('option');
-        option.value = model;
-        option.textContent = modelNameMapping[model];
-        first_select.appendChild(option);
-        second_select.appendChild(option.cloneNode(true));
-    });
-    updateModelSelect();
-}
-
 function populateQuestions(questions) {
-    const category_select = document.getElementById('category-select');
-
-    let index = 0;
+    questionsList[0] = null;
     questionsCount = questions.length;
     questions.forEach(question => {
-        index++;
         const q = question.question;
         // Store the question data in a mapping for later use.
         const modelA = question.reviewer_1_model;
@@ -112,15 +82,12 @@ function populateQuestions(questions) {
             return discussion.slice(2).map(message => {
                 const [model, response] = Object.entries(message)[0];
                 response.model = model;
+                response.content = response.content.split('[System]')[0];
                 return response;
             });
         }
 
-        if (questionsList[index] === undefined) {
-            questionsList[index] = [];
-        }
-
-        questionsList[index].push({
+        questionsList.push({
             question: q,
             answers: [question.answer_a, question.answer_b],
             reviewers: [modelA, modelB],
@@ -128,7 +95,7 @@ function populateQuestions(questions) {
             discussions: formatDiscussion(question[`${modelA}_${modelB}_discussion`]),
         });
 
-        questionsList[index].push({
+        questionsList.push({
             question: q,
             answers: [question.answer_a, question.answer_b],
             reviewers: [modelB, modelA],
@@ -136,17 +103,6 @@ function populateQuestions(questions) {
             discussions: formatDiscussion(question[`${modelB}_${modelA}_discussion`]),
         })
 
-        // const option = document.createElement('option');
-        // Store the question id in the category mapping.
-        // if (question.category in categoryMapping) {
-        //     categoryMapping[question.category].push(question.id);
-        // } else {
-        //     categoryMapping[question.category] = [question.id];
-        //     const category_option = document.createElement('option');
-        //     category_option.value = question.category;
-        //     category_option.textContent = capitalizeFirstChar(question.category);
-        //     category_select.appendChild(category_option);
-        // }
     });
     // Set the default category.
     updateQuestionSelect(currentQuestionIndex);
@@ -171,12 +127,9 @@ function winMessage(preference) {
 }
 
 function makeDiscussionMessageView({model, content, preference}, colorClass){
-    const rowdiv = document.createElement('div');
-    rowdiv.className = "row";
-
     const betterModelMessage = winMessage(preference);
     const div = document.createElement('div');
-    div.className = "card expandable-card";
+    div.className = "card expandable-card mb-4";
     div.innerHTML = `
         <div class="card-header pad-card-bottom ${colorClass}" >${modelNameMapping[model]}: ${betterModelMessage}</div>
         <div class="card-body">
@@ -195,15 +148,12 @@ function makeDiscussionMessageView({model, content, preference}, colorClass){
         e.target.innerHTML = card.classList.contains('expanded') ? less : more;
     });
 
-    rowdiv.appendChild(div)
-
-    return rowdiv;
+    return div;
 }
 
 function displayAnswers(index) {
-    const firstReviewer = document.getElementById('first-reviewer-select').value;
-    const secondReviewer = document.getElementById('second-reviewer-select').value;
-    let question = questionsList[index].filter(q => q.reviewers[0] === firstReviewer && q.reviewers[1] === secondReviewer)[0];
+    let question = questionsList[index]
+    const [firstReviewer, secondReviewer] = question.reviewers;
     if (question === undefined) {
         console.log('question not found');
         question = {
@@ -233,47 +183,6 @@ function displayAnswers(index) {
         discussionArea.appendChild(makeDiscussionMessageView(discussion, colorClass));
     });
 
-    // Display evaluation
-    // score_text = modelNameMapping[firstModel] + " " + score[0] + "/10, " + secondModel + " " + score[1] + "/10";
-    // document.getElementById('evaluation-header').textContent = "GPT-4 Evaluation" + " (Score: " + score_text + ")";
-    // document.getElementById('evaluation-result').innerHTML = text2Markdown(question.evaluations[firstModel]);
-
-    // Update model names
-    let assistant1_title = "Assistant #1";
-    let assistant2_title = "Assistant #2";
-    // // Update scores/labels.
-    // let assistant1_score_label = score[0].toString() + '/10';
-    // let assistant2_score_label = score[1].toString() + '/10';
-
-    // Update the winner.
-/*
-    if (score[0] == score[1]) {
-        assistant1_title = '🏆 ' + assistant1_title;
-        assistant1_score_label = '🏆 ' + assistant1_score_label;
-        assistant2_title = '🏆 ' + assistant2_title;
-        assistant2_score_label = '🏆 ' + assistant2_score_label;
-        firstModelHeaderColor = colorYellow;
-        secondModelHeaderColor = colorYellow;
-    } else if (score[0] > score[1]) {
-        assistant1_title = '🏆 ' + assistant1_title;
-        assistant1_score_label = '🏆 ' + assistant1_score_label;
-        firstModelHeaderColor = colorBlue;
-        secondModelHeaderColor = colorRed;
-    } else if (score[0] < score[1]) {
-        assistant2_title = '🏆 ' + assistant2_title;
-        assistant2_score_label = '🏆 ' + assistant2_score_label;
-        firstModelHeaderColor = colorRed;
-        secondModelHeaderColor = colorBlue;
-    }
-*/
-
-
-    // document.getElementById('first-model-header').textContent = assistant1_title;
-    // document.getElementById('second-model-header').textContent = assistant2_title;
-
-    // document.getElementById('first-score-label').textContent = assistant1_score_label;
-    // document.getElementById('second-score-label').textContent = assistant2_score_label;
-
     // Update expand buttons visibility for both cards after displaying answers
     // Reset the expanded state and update expand buttons visibility for both cards after displaying answers
     document.querySelectorAll('.expandable-card').forEach(card => {
@@ -289,51 +198,21 @@ document.getElementById('question-select').addEventListener('change', e => {
     displayQuestion(currentQuestionIndex);
 });
 
-// document.getElementById('category-select').addEventListener('change', e => {
-//     let currentCategory = e.target.value;
-//     const questionIds = categoryMapping[currentCategory];
-//     currentQuestionIndex = questionIds[0];
-//     updateQuestionSelect(currentQuestionIndex);
-//     displayQuestion(currentQuestionIndex);
-// });
-
-// Update expand buttons whenever the model is changed
-document.getElementById('first-reviewer-select').addEventListener('change', () => {
-    displayAnswers(currentQuestionIndex);
-    document.querySelectorAll('.expandable-card').forEach(card => {
-        updateExpandButtonVisibility(card);
-    });
-    updateModelSelect();
-});
-document.getElementById('second-reviewer-select').addEventListener('change', () => {
-    displayAnswers(currentQuestionIndex);
-    document.querySelectorAll('.expandable-card').forEach(card => {
-        updateExpandButtonVisibility(card);
-    });
-    updateModelSelect();
-});
-
-function switchQuestionAndCategory() {
+function switchQuestion() {
     document.getElementById('question-select').value = currentQuestionIndex;
-    // old_category = document.getElementById('category-select').value;
-    // new_category = questionsList[currentQuestionIndex].category;
-    // if (old_category != new_category) {
-    //     document.getElementById('category-select').value = new_category;
-    //     updateQuestionSelect(currentQuestionIndex);
-    // }
     displayQuestion(currentQuestionIndex);
 }
 
 document.getElementById('prev-question').addEventListener('click', () => {
     // Question index starts from 1.
     currentQuestionIndex = Math.max(1, currentQuestionIndex - 1);
-    switchQuestionAndCategory();
+    switchQuestion();
 });
 
 document.getElementById('next-question').addEventListener('click', () => {
     // Question index starts from 1.
     currentQuestionIndex = Math.min(questionsCount, currentQuestionIndex + 1);
-    switchQuestionAndCategory();
+    switchQuestion();
 });
 
 function updateExpandButtonVisibility(card) {
