@@ -2,6 +2,18 @@
 
 This is the repository that contains source code for the [PRD website](https://nowhereyet.github.io).
 
+# Citation Information
+
+The associated paper may be cited as
+```tex
+@article{li2023prd,
+    title={PRD: Peer Rank and Discussion Improve Large Language Model based Evaluations},
+    author={Li, Ruosen and Patel, Teerth, and Du, Xinya},
+    journal={arXiv preprint arXiv:2307.02762},
+    year={2023}
+}
+```
+
 # Attribution
 Based on [MagicBrush website](https://github.com/drogozhang/MagicBrush/)
 # Website License
